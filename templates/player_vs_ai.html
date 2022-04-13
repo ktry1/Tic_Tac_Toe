@@ -1,0 +1,285 @@
+{%extends "base.html "%}
+{%block content%}
+
+<div style="text-align:center;margin:1% auto" class="container">
+    <audio id="hover-block" >
+  <source   src={{url_for("static", filename="hover-block.mp3")}} type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
+    <audio id="hover-btn" >
+  <source   src={{url_for("static", filename="hover_sfx_1.mp3")}} type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
+     <audio id="press-block" >
+  <source   src={{url_for("static", filename="hover-button.mp3")}} type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
+         <audio id="press-button" >
+  <source   src={{url_for("static", filename="press_button.wav")}} type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
+
+    <div style="text-align:center;margin:1% auto" class="container">
+
+
+    <h1 id="h1" style="font-family: 'Press Start 2P', cursive;color:white;font-size:clamp(3rem, 4.5rem, 8vw);margin-bottom:2%" class="neon_text" >Player 1 Turn</h1>
+    {%for i in range (9)%}
+    <input  type="button"  value="󠀠󠀠⬜"  id={{i}} class="btn btn-primary neon_box" onClick="reply_click(this.id)">
+    {%if (i-2)%3==0 and not i==0%}
+    <br>
+    {%endif%}
+    {%endfor%}
+    <input style="background-color:#E15FED;border-color:#A63EC5;font-family: 'Press Start 2P', cursive;font-size:clamp(1rem, 2rem, 8vw);margin:5% auto 1.5% auto;width:80%;border-radius: 1rem;color:white"  type="button" onclick="Restart()" value="Restart"  id="restart_btn" class="btn btn-info" onClick="reply_click(this.id)">
+    <br>
+    <input style="font-family: 'Press Start 2P', cursive;font-size:clamp(1rem, 2rem, 8vw);width:80%;
+    display:block;margin:0px auto;border-radius: 1rem"  type="button"  value="Back"  id="back_btn" class="btn btn-primary" onClick="Back()">
+</div>
+<script>
+  var audio4 = $("#press-button")[0];
+ var audio3 = $("#press-block")[0];
+ var audio = $("#hover-block")[0];
+
+$("#0").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#1").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#2").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#3").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#4").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#5").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#6").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#7").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#8").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+
+var audio1= $("#hover-btn")[0];
+$("#restart_btn").mouseenter(function() {
+audio1.currentTime = 0;
+  audio1.play();
+});
+
+$("#back_btn").mouseenter(function() {
+audio1.currentTime = 0;
+  audio1.play();
+});
+
+function Back(){
+audio4.currentTime = 0;
+  audio4.play();
+   audio4.addEventListener("ended", function(){
+    window.location.href="{{url_for("choice")}}";
+    });
+}
+
+function Restart(){
+audio4.currentTime = 0;
+  audio4.play();
+h1.innerHTML = "Player 1 Turn";
+h1.style.color = "white";
+$(':button').css("background-color","pink");
+$(':button').prop('value', '󠀠󠀠⬜');
+document.getElementById("restart_btn").value="Restart";
+document.getElementById("back_btn").value="Back";
+document.getElementById("restart_btn").style.background = "#E15FED";
+document.getElementById("back_btn").style.background = "#0d6efd";
+field = [0, 0, 0, 0, 0, 0, 0, 0, 0,3];
+turn = "player1";
+return 0
+}
+
+var field = [0, 0, 0, 0, 0, 0, 0, 0, 0,3];
+var turn = "player1";
+var corners = [0,2,6,8];
+var choices=["columns","random"]
+
+
+function reply_click(clicked_id) {
+    button = document.getElementById(clicked_id);
+    h1 = document.getElementById("h1");
+    if (button.value == "⭕" || button.value == "❎") {
+        button.blur();
+        return 0;
+    }
+    if (turn == "player1") {
+        var end = "false";
+        button.value = "❎";
+        field[clicked_id] = 1;
+        audio3.currentTime = 0;
+        audio3.play();
+        button.style.background = "#fff";
+            button.blur();
+        if (field[0] == 1 && field[1] == 1 && field[2] == 1 || field[3] == 1 && field[4] == 1 && field[5] == 1
+        || field[6] == 1 && field[7] == 1 && field[8] == 1
+        || field[0] == 1 && field[3] == 1 && field[6] == 1 || field[1] == 1 && field[4] == 1 && field[7] == 1
+        || field[2] == 1 && field[5] == 1 && field[8] == 1)
+        {end = "true";}
+
+            if (field[0] == 1 && field[4] == 1 && field[8] == 1 || field[2] == 1 && field[4] == 1 && field[6] == 1) {end = "true";}
+
+            if (end == "true")
+            { h1.innerHTML = "Game Over Player 1 wins!";
+                return 0;}
+
+            if (! field.includes(0)){
+
+            h1.innerHTML = "Game over , Tie";
+            h1.style.color = "white";
+            return 0;}
+
+
+            turn = "player2";
+            h1.innerHTML = "Player 2 Turn";
+            h1.style.color = "white";
+
+            var rand=9;
+            skip="false";
+
+        //Diagonals
+        if (field[2] == 2 && field[4] == 2 && ! field[6] == 1 && skip=="false" || field[4] == 2 && field[6] == 2 && ! field[2] == 1 && skip=="false"
+        || field[2] == 2 && field[6] == 2 && ! field[4] == 1  && skip=="false") {
+            document.getElementById(2).click();
+            document.getElementById(4).click();
+            document.getElementById(6).click();
+            skip="true";}
+
+        if (field[0] == 2 && field[4] == 2 && ! field[8] == 1 && skip=="false" || field[4] == 2 && field[8] == 2 && ! field[0] == 1 && skip=="false"
+        || field[0] == 2 && field[8] == 2 && ! field[4] == 1 && skip=="false") {
+            document.getElementById(0).click();
+            document.getElementById(4).click();
+            document.getElementById(8).click();
+            skip="true"}
+
+        //Rows
+        if (field[0] == 2 && field[1] == 2 && ! field[2] == 1 && skip=="false" || field[0] == 2 && field[2] == 2 && ! field[1] == 1 && skip=="false"
+        || field[1] == 2 && field[2] == 2 && ! field[0] == 1 && skip=="false") {
+            document.getElementById(0).click();
+            document.getElementById(1).click();
+            document.getElementById(2).click();
+            skip="true"}
+
+        if (field[3] == 2 && field[4] == 2 && ! field[5] == 1 && skip=="false" || field[3] == 2 && field[5] == 2 && ! field[4] == 1 && skip=="false"
+        || field[4] == 2 && field[5] == 2 && ! field[0] == 1 && skip=="false") {
+            document.getElementById(3).click();
+            document.getElementById(4).click();
+            document.getElementById(5).click();
+            skip="true"}
+
+        if (field[6] == 2 && field[7] == 2 && ! field[8] == 1 && skip=="false" || field[6] == 2 && field[8] == 2 && ! field[7] == 1 && skip=="false"
+        || field[7] == 2 && field[8] == 2 && ! field[6] == 1 && skip=="false") {
+            document.getElementById(6).click();
+            document.getElementById(7).click();
+            document.getElementById(8).click();
+            skip="true"}
+
+        //Columns
+        if (field[0] == 2 && field[3] == 2 && ! field[6] == 1 && skip=="false" || field[0] == 2 && field[6] == 2 && ! field[3] == 1 && skip=="false"
+        || field[3] == 2 && field[6] == 2 && ! field[0] == 1 && skip=="false") {
+            document.getElementById(0).click();
+            document.getElementById(3).click();
+            document.getElementById(6).click();
+            skip="true"}
+
+        if (field[1] == 2 && field[4] == 2 && ! field[7] == 1 && skip=="false" || field[4] == 2 && field[7] == 2 && ! field[1] == 1 && skip=="false"
+        || field[1] == 2 && field[7] == 2 && ! field[4] == 1 && skip=="false") {
+            document.getElementById(1).click();
+            document.getElementById(4).click();
+            document.getElementById(7).click();
+            skip="true"}
+
+        if (field[2] == 2 && field[5] == 2 && ! field[8] == 1 && skip=="false" || field[2] == 2 && field[8] == 2 && ! field[5] == 1 && skip=="false"
+        || field[5] == 2 && field[8] == 2 && ! field[2] == 1 && skip=="false") {
+            document.getElementById(2).click();
+            document.getElementById(5).click();
+            document.getElementById(8).click();
+            skip="true"}
+
+
+        if (field[4]==0){
+        document.getElementById(4).click();
+        skip="true";}
+
+
+
+
+        var available_corners=[];
+        for ( var index = 0; index < corners.length; index++){
+        if (field[corners[index]]==0){
+        available_corners.push(corners[index]);};
+        }
+
+        var choice=choices[Math.floor(Math.random()*choices.length)];
+
+        if (!(available_corners.length==0) && skip=="false" && choice=="columns"){
+        document.getElementById(available_corners[Math.floor(Math.random()*available_corners.length)]).click();
+        skip="true";
+        }
+
+
+
+
+            if (skip=="false")
+            {while (!field[rand]==0) {
+  rand = Math.floor(Math.random() * 9);}
+            field[rand]=2;
+            document.getElementById(rand).click();
+        }
+
+        }
+
+     else {
+        var end = "false";
+        button.value = "⭕";
+        field[clicked_id] = 2;
+        audio3.currentTime = 0;
+        audio3.play();
+
+         if (field[0] == 2 && field[1] == 2 && field[2] == 2 || field[3] == 2 && field[4] == 2 && field[5] == 2
+        || field[6] == 2 && field[7] == 2 && field[8] == 2
+        || field[0] == 2 && field[3] == 2 && field[6] == 2 || field[1] == 2 && field[4] == 2 && field[7] == 2
+        || field[2] == 2 && field[5] == 2 && field[8] == 2)
+        {end = "true";}
+
+        if (field[0] == 2 && field[4] == 2 && field[8] == 2 || field[2] == 2 && field[4] == 2 && field[6] == 2) {
+            end = "true";
+        }
+        button.style.background = "#fff";
+        button.blur();
+        if (end == "true") {
+            h1.innerHTML = "Game Over Ai wins!";
+            return 0;
+        }
+         if (! field.includes(0)){
+            h1.innerHTML = "Game over , Tie";
+            h1.style.color = "white";
+            return 0;
+            }
+        turn = "player1";
+        h1.innerHTML = "Player 1 Turn";
+        h1.style.color = "white";
+
+    }
+}
+</script>
+{%endblock%}
+
+

@@ -1,0 +1,47 @@
+{%extends "base.html "%}
+{%block content%}
+<audio id="hover" >
+  <source   src={{url_for("static", filename="hover_sfx_1.mp3")}} type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
+ <audio id="press-button" >
+  <source   src={{url_for("static", filename="press_button.wav")}} type="audio/mpeg"> Your browser does not support the audio element.
+</audio>
+
+<div style="text-align:center;margin:1% auto" class="container">
+    <h1 id="h1" style="color:white;font-family: 'Press Start 2P', cursive; font-size:clamp(2rem, 5rem, 8vw);" class="neon_text" >Welcome to tic-tac-toe</h1>
+    <p style="color:white;font-family: 'Press Start 2P', cursive; font-size:4vw;" class="neon_text">Choose mode</p>
+    <input style="font-family: 'Press Start 2P', cursive;width:80%; margin:1% auto;font-size:clamp(2rem, 6rem, 8vw)" id="Button1"   class="btn btn-primary neon_box"  type="button" value="Hotseat" >
+    <br>
+    <input style="font-family: 'Press Start 2P', cursive;width:80%; margin:1% auto;font-size:clamp(2rem, 6rem, 8vw)" id="Button2"    class="btn btn-primary neon_box"  type="button" value="Vs Ai">
+</div>
+
+<script type="text/javascript">
+    document.getElementById("Button1").onclick = function () {
+        audio2.currentTime = 0;
+  audio2.play();
+   audio2.addEventListener("ended", function(){
+    window.location.href = "{{url_for("play_pvp")}}";
+    });
+    };
+
+     document.getElementById("Button2").onclick = function () {
+        audio2.currentTime = 0;
+  audio2.play();
+   audio2.addEventListener("ended", function(){
+    window.location.href = "{{url_for("play_ai")}}";
+    });
+       }
+
+
+  var audio = $("#hover")[0];
+   var audio2 = $("#press-button")[0];
+$("#Button1").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+$("#Button2").mouseenter(function() {
+audio.currentTime = 0;
+  audio.play();
+});
+</script>
+{%endblock%}
