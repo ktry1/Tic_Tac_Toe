@@ -214,7 +214,67 @@ function reply_click(clicked_id) {
             skip="true"}
 
 
-        if (field[4]==0){
+        //Defencives
+        if (field[2] == 1 && field[4] == 1 && field[6] == 0 && skip=="false" || field[4] == 1 && field[6] == 1 && field[2] == 0 && skip=="false"
+        || field[2] == 1 && field[6] == 1 && field[4] == 0  && skip=="false") {
+            document.getElementById(2).click();
+            document.getElementById(4).click();
+            document.getElementById(6).click();
+            skip="true";}
+
+        if (field[0] == 1 && field[4] == 1 && field[8] == 0 && skip=="false" || field[4] == 1 && field[8] == 1 && field[0] == 0 && skip=="false"
+        || field[0] == 1 && field[8] == 1 && field[4] == 0 && skip=="false") {
+            document.getElementById(0).click();
+            document.getElementById(4).click();
+            document.getElementById(8).click();
+            skip="true"}
+
+        //Rows
+        if (field[0] == 1 && field[1] == 1 &&  field[2] == 0 && skip=="false" || field[0] == 1 && field[2] == 1 &&  field[1] == 0 && skip=="false"
+        || field[1] == 1 && field[2] == 1 &&  field[0] == 0 && skip=="false") {
+            document.getElementById(0).click();
+            document.getElementById(1).click();
+            document.getElementById(2).click();
+            skip="true"}
+
+        if (field[3] == 1 && field[4] == 1 &&  field[5] == 0 && skip=="false" || field[3] == 1 && field[5] == 1 &&  field[4] == 0 && skip=="false"
+        || field[4] == 1 && field[5] == 1 &&  field[0] == 0 && skip=="false") {
+            document.getElementById(3).click();
+            document.getElementById(4).click();
+            document.getElementById(5).click();
+            skip="true"}
+
+        if (field[6] == 1 && field[7] == 1 &&  field[8] == 0 && skip=="false" || field[6] == 1 && field[8] == 1 &&  field[7] == 0 && skip=="false"
+        || field[7] == 1 && field[8] == 1 &&  field[6] == 0 && skip=="false") {
+            document.getElementById(6).click();
+            document.getElementById(7).click();
+            document.getElementById(8).click();
+            skip="true"}
+
+        //Columns
+        if (field[0] == 1 && field[3] == 1 &&  field[6] == 0 && skip=="false" || field[0] == 1 && field[6] == 1 &&  field[3] == 0 && skip=="false"
+        || field[3] == 1 && field[6] == 1 &&  field[0] == 0 && skip=="false") {
+            document.getElementById(0).click();
+            document.getElementById(3).click();
+            document.getElementById(6).click();
+            skip="true"}
+
+        if (field[1] == 1 && field[4] == 1 &&  field[7] == 0 && skip=="false" || field[4] == 1 && field[7] == 1 &&  field[1] == 0 && skip=="false"
+        || field[1] == 1 && field[7] == 1 &&  field[4] == 0 && skip=="false") {
+            document.getElementById(1).click();
+            document.getElementById(4).click();
+            document.getElementById(7).click();
+            skip="true"}
+
+        if (field[2] == 1 && field[5] == 1 &&  field[8] == 0 && skip=="false" || field[2] == 1 && field[8] == 1 &&  field[5] == 0 && skip=="false"
+        || field[5] == 1 && field[8] == 1 &&  field[2] == 0 && skip=="false") {
+            document.getElementById(2).click();
+            document.getElementById(5).click();
+            document.getElementById(8).click();
+            skip="true"}
+
+
+        if (field[4]==0 && skip=="false"){
         document.getElementById(4).click();
         skip="true";}
 
